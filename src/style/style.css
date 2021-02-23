@@ -27,11 +27,6 @@ body {
   margin-top: 1rem;
 }
 
-.sectionTitle {
-  display: flex;
-  justify-content: center;
-}
-
 .generalForm {
   display: flex;
   justify-content: center;
@@ -99,6 +94,7 @@ body {
   padding: 0.5rem 1rem;
   color: white;
   cursor: pointer;
+  width: 10%;
 }
 
 .renderedSection {
@@ -114,4 +110,21 @@ body {
 
 .spanArtc {
   font-weight: bold;
+}
+
+.pdfDiv {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.pdfBtn {
+  outline: none;
+  font-size: 1rem;
+  margin: 0 1rem 0 0.5rem;
+  background: rgb(0, 103, 134);
+  border: 1px solid #ccc;
+  color: white;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
 }
