@@ -1,36 +1,33 @@
 import React, { Component } from 'react';
+import '../style/style.css';
 
 class DisplayGeneral extends Component {
   render() {
-    const { name, address, city, state, zip, email, phone } = this.props;
+    const { name, address, city, state, email, phone } = this.props;
 
     return (
       <section className='renderedSection'>
-        <article>
+        <article className='infoArtc'>
           <span className='spanArtc'>Name: </span>
           {name}
         </article>
-        <article>
+        <article className='infoArtc'>
           <span className='spanArtc'>Address: </span>
           {address}
         </article>
-        <article>
+        <article className='infoArtc'>
           <span className='spanArtc'>City: </span>
           {city}
         </article>
-        <article>
+        <article className='infoArtc'>
           <span className='spanArtc'>State: </span>
           {state}
         </article>
-        <article>
-          <span className='spanArtc'>Zip: </span>
-          {zip}
-        </article>
-        <article>
+        <article className='infoArtc'>
           <span className='spanArtc'>Email: </span>
           {email}
         </article>
-        <article>
+        <article className='infoArtc'>
           <span className='spanArtc'>Phone: </span>
           {phone}
         </article>

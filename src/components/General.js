@@ -11,7 +11,6 @@ class General extends Component {
       address: '',
       city: '',
       state: '',
-      zip: '',
       email: '',
       phone: '',
       isEditing: false,
@@ -87,17 +86,6 @@ class General extends Component {
               id='stateInput'
             />
           </label>
-          <label htmlFor='zipInput'>
-            Zip:{' '}
-            <input
-              type='number'
-              name='zip'
-              value={this.state.zip}
-              onChange={this.handleChange}
-              id='zipInput'
-              placeholder='00000000'
-            />
-          </label>
           <label htmlFor='emailInput'>
             Email:{' '}
             <input
@@ -125,31 +113,23 @@ class General extends Component {
   };
 
   renderGeneral() {
-    const {
-      isEditing,
-      name,
-      address,
-      city,
-      state,
-      zip,
-      email,
-      phone,
-    } = this.state;
+    const { isEditing, name, address, city, state, email, phone } = this.state;
     return (
       <div>
         {isEditing ? (
-          <div>
+          <div className='renderedDiv'>
             <DisplayGeneral
               handleSubmit={this.handleSubmit}
               name={name}
               address={address}
               city={city}
               state={state}
-              zip={zip}
               email={email}
               phone={phone}
             />
-            <button onClick={this.handleClick}>Edit</button>
+            <button className='editBtn' onClick={this.handleClick}>
+              Edit
+            </button>
           </div>
         ) : (
           this.form()

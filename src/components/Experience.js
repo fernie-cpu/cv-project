@@ -112,7 +112,7 @@ class Experience extends Component {
     return (
       <div>
         {isEditing ? (
-          <div>
+          <div className='renderedDiv'>
             <DisplayExperience
               handleSubmit={this.handleSubmit}
               name={occupation}
@@ -121,7 +121,9 @@ class Experience extends Component {
               dateTo={dateTo}
               description={description}
             />
-            <button onClick={this.handleClick}>Edit</button>
+            <button className='editBtn' onClick={this.handleClick}>
+              Edit
+            </button>
           </div>
         ) : (
           this.form()

@@ -95,7 +95,7 @@ class Educational extends Component {
     return (
       <div>
         {isEditing ? (
-          <div>
+          <div className='renderedDiv'>
             <DisplayEducational
               handleSubmit={this.handleSubmit}
               school={school}
@@ -103,7 +103,9 @@ class Educational extends Component {
               dateFrom={dateFrom}
               dateTo={dateTo}
             />
-            <button onClick={this.handleClick}>Edit</button>
+            <button className='editBtn' onClick={this.handleClick}>
+              Edit
+            </button>
           </div>
         ) : (
           this.form()
