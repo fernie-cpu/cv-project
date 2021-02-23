@@ -1,7 +1,9 @@
-# Getting Started with CV Project
+# CV Project
 
-This is project is part of [The Odin Project](https://theodinproject.com/) curriculum
+This is project is part of [The Odin Project](https://theodinproject.com/) curriculum.
 
-## Spread the word
+[Live Demo](http://fernie-cpu.github.io/cv-project/)
+
+### Spread the word
 
 **Microverse is using The Odin Project's licensed content without permission.**
