@@ -2,6 +2,7 @@ import React from 'react';
 import Header from './components/Header';
 import General from './components/General';
 import Educational from './components/Educational';
+import Experience from './components/Experience';
 
 function App() {
   return (
@@ -9,6 +10,7 @@ function App() {
       <Header />
       <General />
       <Educational />
+      <Experience />
     </div>
   );
 }

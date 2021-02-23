@@ -1,16 +1,17 @@
 import React, { Component } from 'react';
 import '../style/style.css';
-import DisplayEducational from './DisplayEducational';
+import DisplayExperience from './DisplayExperience';
 
-class Educational extends Component {
+class Experience extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      school: '',
-      degree: '',
+      occupation: '',
+      employer: '',
       dateFrom: '',
       dateTo: '',
+      description: '',
       isEditing: false,
     };
 
@@ -44,45 +45,54 @@ class Educational extends Component {
     return (
       <div>
         <form className='generalForm'>
-          <label htmlFor='schoolInput' className='row'>
-            School:{' '}
+          <label htmlFor='occupationInput' className='row'>
+            Occupation:{' '}
             <input
               type='text'
-              name='school'
-              value={this.state.school}
+              name='occupation'
+              value={this.state.occupation}
               onChange={this.handleChange}
-              id='schoolInput'
+              id='occupationInput'
             />
           </label>
-          <label htmlFor='degreeInput' className='row'>
-            Degree:{' '}
+          <label htmlFor='employerInput' className='row'>
+            Employer:{' '}
             <input
               type='text'
-              name='degree'
-              value={this.state.degree}
+              name='employer'
+              value={this.state.employer}
               onChange={this.handleChange}
-              id='degreeInput'
+              id='employerInput'
             />
           </label>
-          <label htmlFor='dateInput'>
+          <label htmlFor='dateFromInput'>
             From:{' '}
             <input
               type='date'
               name='dateFrom'
               value={this.state.dateFrom}
               onChange={this.handleChange}
-              id='dateInput'
+              id='dateFromInput'
             />
           </label>
-          <label htmlFor='date2Input'>
+          <label htmlFor='dateToInput'>
             To:{' '}
             <input
               type='date'
               name='dateTo'
               value={this.state.dateTo}
               onChange={this.handleChange}
-              id='date2Input'
+              id='dateToInput'
             />
+          </label>
+          <label htmlFor='descriptionInput'>
+            Description:{' '}
+            <textarea
+              name='description'
+              value={this.state.description}
+              onChange={this.handleChange}
+              id='descriptionInput'
+            ></textarea>
           </label>
           <button onClick={this.handleSubmit}>Submit</button>
         </form>
@@ -91,17 +101,25 @@ class Educational extends Component {
   };
 
   renderGeneral() {
-    const { isEditing, school, degree, dateFrom, dateTo } = this.state;
+    const {
+      isEditing,
+      occupation,
+      employer,
+      dateFrom,
+      dateTo,
+      description,
+    } = this.state;
     return (
       <div>
         {isEditing ? (
           <div>
-            <DisplayEducational
+            <DisplayExperience
               handleSubmit={this.handleSubmit}
-              school={school}
-              degree={degree}
+              name={occupation}
+              employer={employer}
               dateFrom={dateFrom}
               dateTo={dateTo}
+              description={description}
             />
             <button onClick={this.handleClick}>Edit</button>
           </div>
@@ -118,7 +136,7 @@ class Educational extends Component {
     return (
       <section className='divGeneral'>
         <div className='sectionTitle'>
-          <h1>Education</h1>
+          <h1>Experience</h1>
         </div>
         {showing ? this.form() : this.renderGeneral()}
       </section>
@@ -126,4 +144,4 @@ class Educational extends Component {
   }
 }
 
-export default Educational;
+export default Experience;

@@ -24,6 +24,7 @@ body {
   flex-direction: column;
   justify-content: center;
   padding: 0 15rem;
+  margin-top: 1rem;
 }
 
 .sectionTitle {
@@ -36,6 +37,7 @@ body {
   justify-content: center;
   padding: 0.3rem;
   flex-wrap: wrap;
+  border-bottom: 2px solid #ccc;
 }
 
 .generalForm label {
@@ -56,6 +58,7 @@ body {
   border-right: none;
   border-bottom: 1px solid #ccc;
   outline: none;
+  background: rgb(245, 245, 245);
 }
 
 .generalForm input:focus {
@@ -67,6 +70,15 @@ body {
 }
 
 .generalForm button {
+  margin-bottom: 0.5rem;
   padding: 0.5rem;
   width: 100%;
+}
+
+.renderedSection {
+  margin: 0.5rem;
+}
+
+.spanArtc {
+  font-weight: bold;
 }

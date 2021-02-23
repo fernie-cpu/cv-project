@@ -1,21 +1,25 @@
 import React, { Component } from 'react';
 import '../style/style.css';
+import DisplayGeneral from './DisplayGeneral';
 
 class General extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
       name: '',
       address: '',
       city: '',
+      state: '',
       zip: '',
       email: '',
       phone: '',
+      isEditing: false,
     };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleClick = this.handleClick.bind(this);
   }
 
   handleChange(e) {
@@ -27,25 +31,22 @@ class General extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    const { name, address, city, zip, email, phone } = this.state;
-    console.log(name, address, city, zip, email, phone);
     this.setState({
-      name: '',
-      address: '',
-      city: '',
-      zip: '',
-      email: '',
-      phone: '',
+      isEditing: true,
     });
   }
 
-  render() {
+  handleClick(e) {
+    e.preventDefault();
+    this.setState({
+      isEditing: false,
+    });
+  }
+
+  form = () => {
     return (
-      <div className='divGeneral'>
-        <div className='sectionTitle'>
-          <h1>General Information</h1>
-        </div>
-        <form className='generalForm' onSubmit={this.handleSubmit}>
+      <div>
+        <form className='generalForm'>
           <label htmlFor='nameInput' className='row'>
             Name:{' '}
             <input
@@ -74,6 +75,16 @@ class General extends Component {
               value={this.state.city}
               onChange={this.handleChange}
               id='cityInput'
+            />
+          </label>
+          <label htmlFor='stateInput'>
+            State:{' '}
+            <input
+              type='text'
+              name='state'
+              value={this.state.state}
+              onChange={this.handleChange}
+              id='stateInput'
             />
           </label>
           <label htmlFor='zipInput'>
@@ -107,9 +118,56 @@ class General extends Component {
               id='phoneInput'
             />
           </label>
-          <button type='submit'>Submit</button>
+          <button onClick={this.handleSubmit}>Submit</button>
         </form>
       </div>
+    );
+  };
+
+  renderGeneral() {
+    const {
+      isEditing,
+      name,
+      address,
+      city,
+      state,
+      zip,
+      email,
+      phone,
+    } = this.state;
+    return (
+      <div>
+        {isEditing ? (
+          <div>
+            <DisplayGeneral
+              handleSubmit={this.handleSubmit}
+              name={name}
+              address={address}
+              city={city}
+              state={state}
+              zip={zip}
+              email={email}
+              phone={phone}
+            />
+            <button onClick={this.handleClick}>Edit</button>
+          </div>
+        ) : (
+          this.form()
+        )}
+      </div>
+    );
+  }
+
+  render() {
+    const { showing } = this.state;
+
+    return (
+      <section className='divGeneral'>
+        <div className='sectionTitle'>
+          <h1>General Information</h1>
+        </div>
+        {showing ? this.form() : this.renderGeneral()}
+      </section>
     );
   }
 }
