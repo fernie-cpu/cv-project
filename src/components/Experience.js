@@ -1,47 +1,33 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import '../style/style.css';
 import DisplayExperience from './DisplayExperience';
 
-class Experience extends Component {
-  constructor(props) {
-    super(props);
+const Experience = (props) => {
+  const [state, setState] = useState(false);
 
-    this.state = {
-      occupation: '',
-      employer: '',
-      dateFrom: '',
-      dateTo: '',
-      description: '',
-      isEditing: false,
-    };
+  const [display, setDisplay] = useState({
+    occupation: '',
+    employer: '',
+    dateFrom: '',
+    dateTo: '',
+    description: '',
+  });
 
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleClick = this.handleClick.bind(this);
-  }
+  const handleChange = (e) => {
+    setDisplay({ ...display, [e.currentTarget.name]: e.currentTarget.value });
+  };
 
-  handleChange(e) {
-    const { name, value } = e.target;
-    this.setState({
-      [name]: value,
-    });
-  }
-
-  handleSubmit(e) {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    this.setState({
-      isEditing: true,
-    });
-  }
+    setState(!state);
+  };
 
-  handleClick(e) {
+  const handleClick = (e) => {
     e.preventDefault();
-    this.setState({
-      isEditing: false,
-    });
-  }
+    setState(!state);
+  };
 
-  form = () => {
+  const form = () => {
     return (
       <div>
         <form className='generalForm'>
@@ -50,8 +36,8 @@ class Experience extends Component {
             <input
               type='text'
               name='occupation'
-              value={this.state.occupation}
-              onChange={this.handleChange}
+              value={state.occupation}
+              onChange={handleChange}
               id='occupationInput'
             />
           </label>
@@ -60,8 +46,8 @@ class Experience extends Component {
             <input
               type='text'
               name='employer'
-              value={this.state.employer}
-              onChange={this.handleChange}
+              value={state.employer}
+              onChange={handleChange}
               id='employerInput'
             />
           </label>
@@ -70,8 +56,8 @@ class Experience extends Component {
             <input
               type='date'
               name='dateFrom'
-              value={this.state.dateFrom}
-              onChange={this.handleChange}
+              value={state.dateFrom}
+              onChange={handleChange}
               id='dateFromInput'
             />
           </label>
@@ -80,8 +66,8 @@ class Experience extends Component {
             <input
               type='date'
               name='dateTo'
-              value={this.state.dateTo}
-              onChange={this.handleChange}
+              value={state.dateTo}
+              onChange={handleChange}
               id='dateToInput'
             />
           </label>
@@ -89,61 +75,57 @@ class Experience extends Component {
             Description:{' '}
             <textarea
               name='description'
-              value={this.state.description}
-              onChange={this.handleChange}
+              value={state.description}
+              onChange={handleChange}
               id='descriptionInput'
             ></textarea>
           </label>
-          <button onClick={this.handleSubmit}>Submit</button>
+          <button onClick={handleSubmit}>Submit</button>
         </form>
       </div>
     );
   };
 
-  renderGeneral() {
+  const renderGeneral = () => {
     const {
-      isEditing,
+      handleSubmit,
       occupation,
       employer,
       dateFrom,
       dateTo,
       description,
-    } = this.state;
+    } = display;
     return (
       <div>
-        {isEditing ? (
+        {display ? (
           <div className='renderedDiv'>
             <DisplayExperience
-              handleSubmit={this.handleSubmit}
+              handleSubmit={handleSubmit}
               name={occupation}
               employer={employer}
               dateFrom={dateFrom}
               dateTo={dateTo}
               description={description}
             />
-            <button className='editBtn' onClick={this.handleClick}>
+            <button className='editBtn' onClick={handleClick}>
               Edit
             </button>
           </div>
         ) : (
-          this.form()
+          form()
         )}
       </div>
     );
-  }
+  };
 
-  render() {
-    const { showing } = this.state;
-
-    return (
-      <section className='divGeneral'>
-        <div className='sectionTitle'>
-          <h1>Experience</h1>
-        </div>
-        {showing ? this.form() : this.renderGeneral()}
-      </section>
-    );
-  }
-}
+  return (
+    <section className='divGeneral'>
+      <div className='sectionTitle'>
+        <h1>Experience</h1>
+      </div>
+      {state ? renderGeneral() : form()}
+    </section>
+  );
+};
 
 export default Experience;

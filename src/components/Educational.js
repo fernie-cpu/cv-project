@@ -1,46 +1,32 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import '../style/style.css';
 import DisplayEducational from './DisplayEducational';
 
-class Educational extends Component {
-  constructor(props) {
-    super(props);
+const Educational = (props) => {
+  const [state, setState] = useState(false);
 
-    this.state = {
-      school: '',
-      degree: '',
-      dateFrom: '',
-      dateTo: '',
-      isEditing: false,
-    };
+  const [display, setDisplay] = useState({
+    school: '',
+    degree: '',
+    dateFrom: '',
+    dateTo: '',
+  });
 
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleClick = this.handleClick.bind(this);
-  }
+  const handleChange = (e) => {
+    setDisplay({ ...display, [e.currentTarget.name]: e.currentTarget.value });
+  };
 
-  handleChange(e) {
-    const { name, value } = e.target;
-    this.setState({
-      [name]: value,
-    });
-  }
-
-  handleSubmit(e) {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    this.setState({
-      isEditing: true,
-    });
-  }
+    setState(!state);
+  };
 
-  handleClick(e) {
+  const handleClick = (e) => {
     e.preventDefault();
-    this.setState({
-      isEditing: false,
-    });
-  }
+    setState(!state);
+  };
 
-  form = () => {
+  const form = () => {
     return (
       <div>
         <form className='generalForm'>
@@ -49,8 +35,8 @@ class Educational extends Component {
             <input
               type='text'
               name='school'
-              value={this.state.school}
-              onChange={this.handleChange}
+              value={state.school}
+              onChange={handleChange}
               id='schoolInput'
             />
           </label>
@@ -59,8 +45,8 @@ class Educational extends Component {
             <input
               type='text'
               name='degree'
-              value={this.state.degree}
-              onChange={this.handleChange}
+              value={state.degree}
+              onChange={handleChange}
               id='degreeInput'
             />
           </label>
@@ -69,8 +55,8 @@ class Educational extends Component {
             <input
               type='date'
               name='dateFrom'
-              value={this.state.dateFrom}
-              onChange={this.handleChange}
+              value={state.dateFrom}
+              onChange={handleChange}
               id='dateInput'
             />
           </label>
@@ -79,53 +65,49 @@ class Educational extends Component {
             <input
               type='date'
               name='dateTo'
-              value={this.state.dateTo}
-              onChange={this.handleChange}
+              value={state.dateTo}
+              onChange={handleChange}
               id='date2Input'
             />
           </label>
-          <button onClick={this.handleSubmit}>Submit</button>
+          <button onClick={handleSubmit}>Submit</button>
         </form>
       </div>
     );
   };
 
-  renderGeneral() {
-    const { isEditing, school, degree, dateFrom, dateTo } = this.state;
+  const renderGeneral = () => {
+    const { handleSubmit, school, degree, dateFrom, dateTo } = display;
     return (
       <div>
-        {isEditing ? (
+        {display ? (
           <div className='renderedDiv'>
             <DisplayEducational
-              handleSubmit={this.handleSubmit}
+              handleSubmit={handleSubmit}
               school={school}
               degree={degree}
               dateFrom={dateFrom}
               dateTo={dateTo}
             />
-            <button className='editBtn' onClick={this.handleClick}>
+            <button className='editBtn' onClick={handleClick}>
               Edit
             </button>
           </div>
         ) : (
-          this.form()
+          form()
         )}
       </div>
     );
-  }
+  };
 
-  render() {
-    const { showing } = this.state;
-
-    return (
-      <section className='divGeneral'>
-        <div className='sectionTitle'>
-          <h1>Education</h1>
-        </div>
-        {showing ? this.form() : this.renderGeneral()}
-      </section>
-    );
-  }
-}
+  return (
+    <section className='divGeneral'>
+      <div className='sectionTitle'>
+        <h1>Education</h1>
+      </div>
+      {state ? renderGeneral() : form()}
+    </section>
+  );
+};
 
 export default Educational;
